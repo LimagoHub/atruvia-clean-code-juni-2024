@@ -11,7 +11,7 @@ public class Fenster extends Frame {
 
         setSize(300, 300);
         Button button = new Button("Drück mich");
-        button.addActionListener(e->ausgabe());
+
         add(button);
 
     }
@@ -23,15 +23,5 @@ public class Fenster extends Frame {
         new Fenster().setVisible(true);
     }
 
-    private void ausgabe() {
-        System.out.println("Button wurde gedrückt");
-    }
-
-//   private class MyActionListner implements ActionListener {
-//
-//       @Override
-//       public void actionPerformed(ActionEvent e) {
-//           ausgabe();
-//       }
-//   }
+  
 }
