@@ -12,7 +12,7 @@ public class ComputerPlayer extends AbstractNimGamePlayer{
     }
 
     @Override
-    public int doTurn(int stones) {
+    public Integer doTurn(Integer stones) {
         int turn = ZUEGE[stones % 4];
         System.out.println("Computer nimmt " + turn + " Steine!");
         return turn;

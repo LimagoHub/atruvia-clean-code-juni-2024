@@ -13,7 +13,7 @@ public class HumanPlayer extends AbstractNimGamePlayer{
     }
 
     @Override
-    public int doTurn(final int stones) {
+    public Integer doTurn(final Integer stones) {
         System.out.println("Es gibt " + stones + " Steine. Bitte nehmen Sie 1, 2 oder 3!");
         return scanner.nextInt();
 
