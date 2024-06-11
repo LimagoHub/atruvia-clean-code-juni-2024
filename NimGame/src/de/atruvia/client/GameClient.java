@@ -6,7 +6,7 @@ public class GameClient {
 
     private final Game game;
 
-    public GameClient(Game game) {
+    public GameClient(final Game game) {
         this.game = game;
     }
 

@@ -1,17 +1,43 @@
 package de.atruvia.game.nimgame;
 
 import de.atruvia.game.Game;
+import de.atruvia.game.nimgame.player.NimGamePlayer;
+import de.atruvia.io.Writer;
 
+import java.util.*;
 import java.util.Scanner;
 
 public class NimGame implements Game {
-    private Scanner scanner = new Scanner(System.in);
+
+
+    private final Writer writer;
+    private final List<NimGamePlayer> players = new ArrayList<>();
     private int stones;
     private int turn;
+    private NimGamePlayer currentPlayer;
 
-    public NimGame() {
+
+    public NimGame(final Writer writer) {
+        this.writer = writer;
         stones = 23;
 
+    }
+
+    public void add(NimGamePlayer player) {
+        // player.setWriter(writer);
+        players.add(player);
+    }
+
+    public void remove(NimGamePlayer player) {
+        players.remove(player);
+    }
+
+    protected NimGamePlayer getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    private void setCurrentPlayer(NimGamePlayer currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 
     @Override
@@ -22,58 +48,46 @@ public class NimGame implements Game {
     }
 
     private void playRound() {// Intergration
-        playSingleTurn();
-        computerTurn();
+
+       for(var player : players) {
+           setCurrentPlayer(player);
+           playSingleTurn();
+       }
     }
 
     private void playSingleTurn() {
         if(isGameover()) return;
-
-        executeConcreteTurn();
-
-        terminateTurn(  "Du LOser");
+        executeTurnAndRepeatUntilValid();
+        terminateTurn( );
 
 
     }
 
-    private void executeConcreteTurn() {
-
-        do humanTurn(); while(turnIsNotValid());
+    private void executeTurnAndRepeatUntilValid() {
+        do turn = getCurrentPlayer().doTurn(stones); while(turnIsNotValid());
     }
 
     private boolean turnIsNotValid() {
         if(  isTurnValid())
             return false;
-        System.out.println("Ungueltiger Zug");
+        write("Ungueltiger Zug");
         return true;
 
     }
 
-    private void humanTurn() {
-        System.out.println("Es gibt " + stones + " Steine. Bitte nehmen Sie 1, 2 oder 3!");
-        turn = scanner.nextInt();
-    }
 
 
-    private void computerTurn() {
-
-        if(isGameover()) return;
-        final int[] zuege = {3,1,1,2};
-        turn = zuege[stones % 4];
-        System.out.println("Computer nimmt " + turn + " Steine!");
-        terminateTurn("Du hast nur Glueck gehabt");
-
-    }
-
-    private void terminateTurn(String message) {
+    private void terminateTurn() {
         updateBoard();
-        printGameOverMessageIfGameIsOver(message);
+        printGameOverMessageIfGameIsOver();
     }
 
-    private void printGameOverMessageIfGameIsOver(String message) {
-        if(isGameover())  System.out.println(message);
+    private void printGameOverMessageIfGameIsOver() {
+        if(isGameover())  write(getCurrentPlayer().getName() + " hat verloren.");
+    }
 
-
+    protected void write(String message) {
+        writer.write(message);
     }
 //------------------------------------------------------------------------------
 
@@ -86,6 +100,6 @@ public class NimGame implements Game {
     }
 
     public boolean isGameover() {
-        return stones < 1;
+        return stones < 1  || players.isEmpty();
     }
 }
