@@ -1,10 +1,7 @@
 package de.atruvia.game.nimgame;
 
 import de.atruvia.game.AbstractGame;
-import de.atruvia.game.Game;
 import de.atruvia.io.Writer;
-
-import java.util.*;
 
 public class NimGame extends AbstractGame<Integer,Integer> {
 

@@ -17,7 +17,7 @@ public abstract class AbstractGame<BOARD, TURN> implements Game{
     private Player<BOARD,TURN> currentPlayer;
 
 
-    public AbstractGame(Writer writer) {
+    protected AbstractGame(Writer writer) {
         this.writer = writer;
     }
 
@@ -50,7 +50,7 @@ public abstract class AbstractGame<BOARD, TURN> implements Game{
     }
 
     public void addPlayer(Player<BOARD,TURN> player) {
-        // player.setWriter(writer);
+
         players.add(player);
     }
 
@@ -63,6 +63,8 @@ public abstract class AbstractGame<BOARD, TURN> implements Game{
         while( ! isGameover()) {
             playRound();
         }
+
+
     }
 
     private void playRound() {// Intergration
@@ -80,6 +82,8 @@ public abstract class AbstractGame<BOARD, TURN> implements Game{
     }
 
     private void executeTurnAndRepeatUntilValid() {
+
+
         do {
             setTurn(getCurrentPlayer().doTurn(getBoard()));
 
