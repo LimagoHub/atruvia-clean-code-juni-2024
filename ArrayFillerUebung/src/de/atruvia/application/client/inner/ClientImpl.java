@@ -5,7 +5,7 @@ import de.atruvia.application.collection.IntArrayFiller;
 
 public class ClientImpl implements Client {
 
-    private int field[] = new int[1000];
+    private int field[] = new int[Integer.MAX_VALUE / 4];
     private final IntArrayFiller arrayFiller;
 
     public ClientImpl(IntArrayFiller arrayFiller) {

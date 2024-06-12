@@ -1,4 +1,4 @@
-package de.atruvia.application.generator.inner;
+package de.atruvia.application.generator.inner.random;
 
 import de.atruvia.application.generator.IntGenerator;
 

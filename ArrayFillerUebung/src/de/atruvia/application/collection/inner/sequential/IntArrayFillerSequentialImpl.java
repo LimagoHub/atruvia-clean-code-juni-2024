@@ -1,14 +1,13 @@
 package de.atruvia.application.collection.inner.sequential;
 
-import de.atruvia.application.collection.ArrayFiller;
 import de.atruvia.application.collection.IntArrayFiller;
 import de.atruvia.application.generator.IntGenerator;
 
-public class ArrayFillerSequentialImpl implements IntArrayFiller {
+public class IntArrayFillerSequentialImpl implements IntArrayFiller {
 
     private final IntGenerator generator;
 
-    public ArrayFillerSequentialImpl(final IntGenerator generator) {
+    public IntArrayFillerSequentialImpl(final IntGenerator generator) {
         this.generator = generator;
     }
 
